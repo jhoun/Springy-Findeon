@@ -98,4 +98,23 @@ router.route('/nameStarts/:id')
       });
     })
 
+router.route('/type/:id')
+  .get((req,res) => {
+      console.log('req.params.id: ', req.params.id);
+      elasticClient.search({
+        body: {
+          query: {
+            match : { types : req.params.id }
+          }
+        }
+      })
+        .then((body) => {
+          res.json(body.hits.total);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
 module.exports = router;

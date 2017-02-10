@@ -67,3 +67,32 @@ describe('GET array of documents where field containes specified prefix', functi
       });
   })
 });
+
+describe('GET total number of pokemon type', function() {
+  it('should return total hits of a pokemon type', function(done) {
+    request(app)
+      .get('/api/pokedex/type/fire')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.equal(56)
+        done()
+      });
+  })
+  it('should return total hits from two pokemon types', function(done) {
+    request(app)
+      .get('/api/pokedex/type/fire&ice')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.equal(91)
+        done()
+      });
+  })
+});
