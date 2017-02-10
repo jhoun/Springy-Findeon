@@ -8,7 +8,6 @@ const elasticClient = new elasticsearch.Client({
 const pokedexJSON = require('./data/pokedex.json');
 
 
-
 elasticClient.ping({
   // ping usually has a 3000ms timeout
   requestTimeout: Infinity
@@ -45,10 +44,25 @@ elasticClient.ping({
 //   });
 // })
 
+// module.exports = (function(){
 
-elasticClient.search({
-  index: 'pokedex',
-  q: 'name:bulbasaur'
-}, function (error, response) {
-  // ...
-});
+//   let all = function(){
+//     elasticClient.search({
+//     })
+//       .then((body) => {
+//         console.log('body: ', body);
+//         return body;
+//     })
+//       .catch((e) => {
+//         console.error(e);
+//     })
+//   }
+
+//   return{
+//     all: all
+//   }
+
+// })();
+
+
+
