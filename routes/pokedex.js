@@ -138,4 +138,28 @@ router.route('/typeAnd/:type1/:type2')
       });
     })
 
+router.route('/typeAnd/:type1/:type2/:type3')
+  .get((req,res) => {
+    console.log('req.params: ', req.params);
+    console.log('req.params.type: ', req.params.type)
+      elasticClient.search({
+        body: {
+          query: {
+              query_string : {
+                default_field : 'types',
+                query : `${req.params.type1} AND ${req.params.type2} AND ${req.params.type3}`
+            }
+          }
+        }
+      })
+        .then((body) => {
+          console.log('body: ', body);
+          res.json(body.hits.total);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
 module.exports = router;

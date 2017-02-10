@@ -98,7 +98,7 @@ describe('GET total number of pokemon type', function() {
 });
 
 describe('GET total number of pokemon with only types specific types', function() {
-  it('should return total hits of pokemond with specific types', function(done) {
+  it('should return total hits of pokemon that matches 2 types', function(done) {
     request(app)
       .get('/api/pokedex/typeAnd/water/grass')
       .expect('Content-Type', /json/)
@@ -108,6 +108,19 @@ describe('GET total number of pokemon with only types specific types', function(
           throw new Error(err);
         }
         expect(res.body).to.equal(3)
+        done()
+      });
+  })
+  it('should return total hits of pokemon that matches 3 types', function(done) {
+    request(app)
+      .get('/api/pokedex/typeAnd/water/grass/flying')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.equal(0)
         done()
       });
   })
