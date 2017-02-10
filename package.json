@@ -1,0 +1,29 @@
+{
+  "name": "Springy-Findeon",
+  "version": "1.0.0",
+  "description": "ElasticSearch exercise on an express api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhoun/Springy-Findeon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhoun/Springy-Findeon/issues"
+  },
+  "homepage": "https://github.com/jhoun/Springy-Findeon#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "elasticsearch": "^12.1.3",
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
