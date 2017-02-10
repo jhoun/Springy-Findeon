@@ -14,7 +14,7 @@ describe('GET /api/pokedex', function() {
         if (err) {
           throw new Error(err);
         }
-        expect(res.body).to.equal(722)
+        expect(res.body).to.equal(800)
         done()
       });
   })
@@ -23,7 +23,7 @@ describe('GET /api/pokedex', function() {
 describe('GET /api/pokedex/:id', function() {
   it('respond with id matching pokemon id', function(done) {
     request(app)
-      .get('/api/pokedex/002')
+      .get('/api/pokedex/1')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function (err, res) {
@@ -46,7 +46,7 @@ describe('GET array of documents where name property matches query', function() 
         if (err) {
           throw new Error(err);
         }
-        expect(res.body).to.deep.equal(['sylveon', 'psyduck'])
+        expect(res.body).to.deep.equal(['psyduck', 'sylveon',])
         done()
       });
   })
@@ -62,7 +62,7 @@ describe('GET array of documents where field containes specified prefix', functi
         if (err) {
           throw new Error(err);
         }
-        expect(res.body).to.deep.equal(['staryu', 'staravia', 'starly', 'staraptor', 'starmie'])
+        expect(res.body).to.deep.equal(['staryu', 'starmie', 'starly', 'staraptor', 'staravia' ])
         done()
       });
   })
@@ -78,7 +78,7 @@ describe('GET total number of pokemon type', function() {
         if (err) {
           throw new Error(err);
         }
-        expect(res.body).to.equal(56)
+        expect(res.body).to.equal(64)
         done()
       });
   })
@@ -91,7 +91,7 @@ describe('GET total number of pokemon type', function() {
         if (err) {
           throw new Error(err);
         }
-        expect(res.body).to.equal(91)
+        expect(res.body).to.equal(105)
         done()
       });
   })

@@ -20,11 +20,11 @@ elasticClient.ping({
 });
 
 
-// pokedexJSON.map((pokemon) =>{
+// pokedexJSON.map((pokemon, i) =>{
 //   elasticClient.create({
 //     index: 'pokedex',
 //     type: 'pokemon',
-//     id: pokemon.id,
+//     id: i,
 //     body: {
 //       name: pokemon.name,
 //       totalStats: pokemon.totalStats,
