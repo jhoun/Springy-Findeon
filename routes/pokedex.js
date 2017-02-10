@@ -36,10 +36,9 @@ router.route('/:id')
             _id: req.params.id
           }
         }
-      },
+      }
     })
       .then((body) => {
-        console.log('body: ', body);
         var allPokemon = body.hits.hits.map((pokemon) => {
           return pokemon._source.name;
         })
@@ -50,5 +49,53 @@ router.route('/:id')
         res.json(card);
     });
   })
+
+router.route('/name/:id')
+  .get((req,res) => {
+    console.log('req.params.id: ', req.params.id);
+    elasticClient.search({
+      index:"pokedex",
+      body: {
+        query: {
+          wildcard: {
+            name: `*${req.params.id}*`
+          }
+        }
+      }
+    })
+      .then((body) => {
+        var allPokemon = body.hits.hits.map((pokemon) => {
+          return pokemon._source.name;
+        })
+        res.json(allPokemon);
+    })
+      .catch((e) => {
+        console.error(e);
+        res.json(card);
+    });
+  })
+
+
+router.route('/nameStarts/:id')
+  .get((req,res) => {
+      console.log('req.params.id: ', req.params.id);
+      elasticClient.search({
+        body: {
+          query: {
+            prefix : { name : req.params.id }
+          }
+        }
+      })
+        .then((body) => {
+          var allPokemon = body.hits.hits.map((pokemon) => {
+            return pokemon._source.name;
+          })
+          res.json(allPokemon);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
 
 module.exports = router;
