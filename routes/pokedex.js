@@ -50,15 +50,14 @@ router.route('/:id')
     });
   })
 
-router.route('/name/:id')
+router.route('/name/:name')
   .get((req,res) => {
-    console.log('req.params.id: ', req.params.id);
     elasticClient.search({
       index:"pokedex",
       body: {
         query: {
           wildcard: {
-            name: `*${req.params.id}*`
+            name: `*${req.params.name}*`
           }
         }
       }
@@ -76,13 +75,12 @@ router.route('/name/:id')
   })
 
 
-router.route('/nameStarts/:id')
+router.route('/nameStarts/:name')
   .get((req,res) => {
-      console.log('req.params.id: ', req.params.id);
       elasticClient.search({
         body: {
           query: {
-            prefix : { name : req.params.id }
+            prefix : { name : req.params.name }
           }
         }
       })
@@ -98,17 +96,40 @@ router.route('/nameStarts/:id')
       });
     })
 
-router.route('/type/:id')
+router.route('/typeOr/:type')
   .get((req,res) => {
-      console.log('req.params.id: ', req.params.id);
       elasticClient.search({
         body: {
           query: {
-            match : { types : req.params.id }
+            match : { types : req.params.type }
           }
         }
       })
         .then((body) => {
+          res.json(body.hits.total);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
+router.route('/typeAnd/:type1/:type2')
+  .get((req,res) => {
+    console.log('req.params: ', req.params);
+    console.log('req.params.type: ', req.params.type)
+      elasticClient.search({
+        body: {
+          query: {
+              query_string : {
+                default_field : 'types',
+                query : `${req.params.type1} AND ${req.params.type2}`
+            }
+          }
+        }
+      })
+        .then((body) => {
+          console.log('body: ', body);
           res.json(body.hits.total);
       })
         .catch((e) => {

@@ -71,7 +71,7 @@ describe('GET array of documents where field containes specified prefix', functi
 describe('GET total number of pokemon type', function() {
   it('should return total hits of a pokemon type', function(done) {
     request(app)
-      .get('/api/pokedex/type/fire')
+      .get('/api/pokedex/typeOr/fire')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function (err, res) {
@@ -84,7 +84,7 @@ describe('GET total number of pokemon type', function() {
   })
   it('should return total hits from two pokemon types', function(done) {
     request(app)
-      .get('/api/pokedex/type/fire&ice')
+      .get('/api/pokedex/typeOr/fire&ice')
       .expect('Content-Type', /json/)
       .expect(200)
       .end(function (err, res) {
@@ -92,6 +92,22 @@ describe('GET total number of pokemon type', function() {
           throw new Error(err);
         }
         expect(res.body).to.equal(105)
+        done()
+      });
+  })
+});
+
+describe('GET total number of pokemon with only types specific types', function() {
+  it('should return total hits of pokemond with specific types', function(done) {
+    request(app)
+      .get('/api/pokedex/typeAnd/water/grass')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.equal(3)
         done()
       });
   })
