@@ -9,7 +9,14 @@ describe('GET /api/pokedex', function() {
     request(app)
       .get('/api/pokedex')
       .expect('Content-Type', /json/)
-      .expect(200, done)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.equal(722)
+        done()
+      });
   })
 });
 
@@ -23,7 +30,6 @@ describe('GET /api/pokedex/:id', function() {
         if (err) {
           throw new Error(err);
         }
-        console.log(res);
         expect(res.body[0]).to.equal('ivysaur')
         done()
       });

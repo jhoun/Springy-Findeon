@@ -14,10 +14,10 @@ router.route('/')
       type: "pokemon"
     })
       .then((body) => {
-        var allPokemon = body.hits.hits.map((pokemon) => {
-          return pokemon._source;
-        })
-        res.json(allPokemon);
+        // var allPokemon = body.hits.hits.map((pokemon) => {
+        //   return pokemon._source;
+        // })
+        res.json(body.hits.total);
     })
       .catch((e) => {
         console.error(e);
