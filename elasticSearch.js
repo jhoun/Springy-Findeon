@@ -28,6 +28,7 @@ elasticClient.ping({
 //     body: {
 //       name: pokemon.name,
 //       totalStats: pokemon.totalStats,
+//       HP: pokemon.HP,
 //       attack: pokemon.attack,
 //       defense: pokemon.defense,
 //       spAtk: pokemon.spAtk,

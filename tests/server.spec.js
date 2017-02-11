@@ -125,3 +125,19 @@ describe('GET total number of pokemon with only types specific types', function(
       });
   })
 });
+
+describe('GET array of pokemon where stats matches value', function() {
+  it('should return pokemon where stats and value match', function(done) {
+    request(app)
+      .get('/api/pokedex/byStats/HP/160')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.deep.equal(['snorlax'])
+        done()
+      });
+  })
+});
