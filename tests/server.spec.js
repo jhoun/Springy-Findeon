@@ -189,3 +189,19 @@ describe('GET array of pokemon where stats is below value', function() {
       });
   })
 });
+
+describe('GET array of pokemon where stats is greater than equal low value and less than the high value', function() {
+  it('should return pokemon where the value of a state is below a specific number', function(done) {
+    request(app)
+      .get('/api/pokedex/between/totalStats/750/800')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.deep.equal(['mewtwomegamewtwoy', 'mewtwomegamewtwox', 'kyogreprimalkyogre', 'groudonprimalgroudon', 'rayquazamegarayquaza'])
+        done()
+      });
+  })
+});

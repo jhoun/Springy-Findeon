@@ -237,4 +237,57 @@ router.route('/lessThan/:stat/:value/')
       });
     })
 
+router.route('/lessThan/:stat/:value/')
+  .get((req,res) => {
+      elasticClient.search({
+        body: {
+          query: {
+              range : {
+                [`${req.params.stat}`] : {
+                  lt : `${req.params.value}`
+              }
+            }
+          }
+        }
+      })
+        .then((body) => {
+          var pokemonName = body.hits.hits.map((pokemon) => {
+            console.log('pokemon: ', pokemon);
+            return pokemon._source.name;
+          })
+          res.json(pokemonName);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
+router.route('/between/:stat/:low/:high')
+  .get((req,res) => {
+      elasticClient.search({
+        body: {
+          query: {
+              range : {
+                [`${req.params.stat}`] : {
+                  lte : `${req.params.high}`,
+                  gt : `${req.params.low}`
+              }
+            }
+          }
+        }
+      })
+        .then((body) => {
+          var pokemonName = body.hits.hits.map((pokemon) => {
+            console.log('pokemon: ', pokemon);
+            return pokemon._source.name;
+          })
+          res.json(pokemonName);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
 module.exports = router;
