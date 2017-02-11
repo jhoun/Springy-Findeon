@@ -27,13 +27,13 @@ elasticClient.ping({
 //     id: i,
 //     body: {
 //       name: pokemon.name,
-//       totalStats: pokemon.totalStats,
-//       HP: pokemon.HP,
-//       attack: pokemon.attack,
-//       defense: pokemon.defense,
-//       spAtk: pokemon.spAtk,
-//       spDef: pokemon.spDef,
-//       speed: pokemon.speed,
+//       totalStats: Number(pokemon.totalStats),
+//       HP: Number(pokemon.HP),
+//       attack: Number(pokemon.attack),
+//       defense: Number(pokemon.defense),
+//       spAtk: Number(pokemon.spAtk),
+//       spDef: Number(pokemon.spDef),
+//       speed: Number(pokemon.speed),
 //       types: pokemon.types
 //     }
 //   }, function (error, response) {

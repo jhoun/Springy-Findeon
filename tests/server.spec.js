@@ -141,3 +141,51 @@ describe('GET array of pokemon where stats matches value', function() {
       });
   })
 });
+
+describe('GET array of pokemon where stats is above value', function() {
+  it('should return pokemon where the value of a state is above a specific number', function(done) {
+    request(app)
+      .get('/api/pokedex/greaterThan/attack/180')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.deep.equal(['mewtwomegamewtwox', 'heracrossmegaheracross', 'groudonprimalgroudon', 'deoxysattackforme', 'rayquazamegarayquaza'])
+        done()
+      });
+  })
+});
+
+describe('GET array of pokemon where stats is above value', function() {
+  it('should return pokemon where the value of a state is above a specific number', function(done) {
+    request(app)
+      .get('/api/pokedex/greaterThan/attack/180')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.deep.equal(['mewtwomegamewtwox', 'heracrossmegaheracross', 'groudonprimalgroudon', 'deoxysattackforme', 'rayquazamegarayquaza'])
+        done()
+      });
+  })
+});
+
+describe('GET array of pokemon where stats is below value', function() {
+  it('should return pokemon where the value of a state is below a specific number', function(done) {
+    request(app)
+      .get('/api/pokedex/lessThan/defense/10')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) {
+          throw new Error(err);
+        }
+        expect(res.body).to.deep.equal(['chansey', 'happiny'])
+        done()
+      });
+  })
+});

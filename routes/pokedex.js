@@ -185,4 +185,31 @@ router.route('/byStats/:stat/:value/')
       });
     })
 
+router.route('/greaterThan/:stat/:value/')
+  .get((req,res) => {
+      elasticClient.search({
+        body: {
+          query: {
+              range : {
+                [`${req.params.stat}`] : {
+                  gte : `${req.params.value}`
+              }
+            }
+          }
+        }
+      })
+        .then((body) => {
+          var pokemonName = body.hits.hits.map((pokemon) => {
+            console.log('pokemon: ', pokemon);
+            return pokemon._source.name;
+          })
+          res.json(pokemonName);
+      })
+        .catch((e) => {
+          console.error(e);
+          res.json(card);
+      });
+    })
+
+
 module.exports = router;
